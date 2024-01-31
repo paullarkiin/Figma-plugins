@@ -1,24 +1,51 @@
-<!-- <h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
-<script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
+<style>
+  body{
+    margin: 0.5em;
+  }
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+  button{
+    margin-top: 10px;
+  }
+
+  input{
+    display: block;
+  }
+
+  .selectMenu{
+    margin-top: 15px;
+  }
+
+  select {
+    width: 100%;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 2px;
+    border-color: #e3e2e2;
+    transition: all .5s ease;
+    position: relative;
+    font-size: 12px;
+    color: #a8a8a8;
+    height: 32px;
+    text-align: left
 }
 
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-} -->
+</style>
 
 <h1>String selector</h1>
 
 <div>
   <label for="name">Name</label>
   <input class="input__field" type="text" placeholder="String to replace with...." id="name">
+</div>
+
+<div id="custom-selection" class="selectMenu">
+  <label for="language">Language</label>
+  <select >
+    <option>Please make a selection</option>
+    <option value="2" >Item 2</option>
+    <option value="3" >Item 3</option>
+  </select>
 </div>
 
 <button class="button button--primary" id="submit-post">Submit</button>
@@ -28,6 +55,11 @@ document.getElementById('cancel').onclick = () => {
   // onmessage = (event) => {
   //   console.log("got this from the plugin code", event.data.pluginMessage)
   // }
+//   //initialize all select menus
+// selectMenu.init();
+
+// //uninitialize all select menus
+// selectMenu.destroy();
 
 
   document.getElementById('submit-post').onclick = () => {

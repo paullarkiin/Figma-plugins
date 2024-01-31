@@ -1,6 +1,6 @@
 {
-  "name": "String selector",
-  "id": "1334477453516082050",
+  "name": "String Translator",
+  "id": "1330103465245071654",
   "api": "1.0.0",
   "main": "code.js",
   "capabilities": [],
@@ -11,7 +11,7 @@
   "ui": "ui.html",
   "networkAccess": {
     "allowedDomains": [
-      "https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/","https://rsms.me/" 
+      "none"
     ]
   }
 }
