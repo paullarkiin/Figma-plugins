@@ -1,4 +1,4 @@
-<h2>Rectangle Creator</h2>
+<!-- <h2>Rectangle Creator</h2>
 <p>Count: <input id="count" value="5"></p>
 <button id="create">Create</button>
 <button id="cancel">Cancel</button>
@@ -12,6 +12,28 @@ document.getElementById('create').onclick = () => {
 
 document.getElementById('cancel').onclick = () => {
   parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
+} -->
+
+<h1>String selector</h1>
+
+<div>
+  <label for="name">Name</label>
+  <input class="input__field" type="text" placeholder="String to replace with...." id="name">
+</div>
+
+<button class="button button--primary" id="submit-post">Submit</button>
+
+<script>
+ 
+  // onmessage = (event) => {
+  //   console.log("got this from the plugin code", event.data.pluginMessage)
+  // }
+
+
+  document.getElementById('submit-post').onclick = () => {
+    const name = document.getElementById('name').value;
+
+    parent.postMessage({pluginMessage: {name}}, '*');
+  }
 
 </script>
