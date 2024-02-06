@@ -1,18 +1,24 @@
 
 figma.showUI(__html__);
 
+require('dotenv').config()
+console.log(`Database name is ${process.env.COMPONENT_KEY}`);
+
 figma.ui.onmessage = async (pluginMessage) => {
 
   await figma.loadFontAsync({ family: "Roboto Slab", style: "Regular" })
-
-  // need to look this up more for in other files.
-  const postComponentSet = figma.root.findOne(node => node.type == "COMPONENT_SET" && node.name == "Notes") as ComponentSetNode;
-  const nodes:SceneNode[] = [];
-
   console.log(pluginMessage)
-  console.log(postComponentSet);
+
+  // get currently selected frame component key
+  //figma.currentPage.selection[0].key
+
+  const key = "key"
+  figma.importComponentSetByKeyAsync(key).then((postComponentSet) => {
+    console.log(postComponentSet); 
   
-  let selectedVarient;
+    const nodes:SceneNode[] = [];
+  
+    let selectedVarient;
 
   //  if(pluginMessage.type === 'create-note'){
     switch(pluginMessage.noteVariant) {
@@ -25,14 +31,13 @@ figma.ui.onmessage = async (pluginMessage) => {
     }
 //  }
 
-const newPost = selectedVarient.createInstance();
-const noteDescription = newPost.findOne(node => node.type == "TEXT" && node.name == "title") as TextNode;
+    const newPost = selectedVarient.createInstance();
+    const noteDescription = newPost.findOne(node => node.type == "TEXT" && node.name == "title") as TextNode;
 
-noteDescription.characters = pluginMessage.description;
-nodes.push(newPost);
-figma.viewport.scrollAndZoomIntoView(nodes);
-
-
+    noteDescription.characters = pluginMessage.description;
+    nodes.push(newPost);
+    figma.viewport.scrollAndZoomIntoView(nodes);
 
   // figma.closePlugin();
+  })
 };
