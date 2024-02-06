@@ -1,9 +1,6 @@
 
 figma.showUI(__html__);
 
-require('dotenv').config()
-console.log(`Database name is ${process.env.COMPONENT_KEY}`);
-
 figma.ui.onmessage = async (pluginMessage) => {
 
   await figma.loadFontAsync({ family: "Roboto Slab", style: "Regular" })
@@ -12,9 +9,9 @@ figma.ui.onmessage = async (pluginMessage) => {
   // get currently selected frame component key
   //figma.currentPage.selection[0].key
 
-  const key = "key"
-  figma.importComponentSetByKeyAsync(key).then((postComponentSet) => {
-    console.log(postComponentSet); 
+  const componentKey = "add-key"
+  figma.importComponentSetByKeyAsync(componentKey).then((noteComponentSet) => {
+    console.log(noteComponentSet); 
   
     const nodes:SceneNode[] = [];
   
@@ -26,7 +23,7 @@ figma.ui.onmessage = async (pluginMessage) => {
           selectedVarient = figma.root.findOne(node => node.type == "COMPONENT" && node.name == "Type=01. Note with title") as ComponentNode;
           break;
       default:
-          selectedVarient = postComponentSet.defaultVariant as ComponentNode;
+          selectedVarient = noteComponentSet.defaultVariant as ComponentNode;
           break;
     }
 //  }
