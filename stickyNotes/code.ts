@@ -8,6 +8,7 @@ figma.ui.onmessage = async (pluginMessage) => {
   await figma.loadFontAsync({ family: "Roboto Slab", style: "Regular" })
   console.log(pluginMessage)
 
+
   // get currently selected frame component key
   //figma.currentPage.selection[0].key
 
@@ -39,10 +40,16 @@ figma.ui.onmessage = async (pluginMessage) => {
         default:
             break;
       }
-      
-      const noteDescription = newPost.findOne(node => node.type == "TEXT" && node.name == "body") as TextNode;
 
-      noteDescription.characters = pluginMessage.description;
+      const noteDescription = newPost.findOne(node => node.type == "TEXT" && node.name == "body") as TextNode;
+      
+      try {
+        noteDescription.characters = pluginMessage.description;
+      }
+      catch(err) {
+        figma.notify('Failed to load component font!')
+      }
+
       nodes.push(newPost);
       figma.viewport.scrollAndZoomIntoView(nodes);
     }
