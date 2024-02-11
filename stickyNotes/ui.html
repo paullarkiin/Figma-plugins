@@ -1,5 +1,77 @@
-<label for="description">Description</label>
-  <input class="textarea" type="textarea" rows="2" value="Your post goes here" id="description">
+
+<style>
+/* global styles */
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* color: var(--figma-color-text); */
+  height: 100%;
+  width: 300px;
+  overflow: hidden;
+}
+textarea {
+  resize: none;
+}
+</style>
+
+<style>
+.ui_container {
+  padding: 16px;
+  height: 100vh;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+input,
+textarea {
+  /* background-color: var(--figma-color-bg); */
+  /* color: var(--figma-color-text); */
+  /* border: 2px solid var(--figma-color-border); */
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  transition: border-color 150ms ease-in-out;
+}
+
+.radio{
+  margin-top: 8px;
+}
+
+#create {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 8px 16px;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  width: 268px;
+  border: none;
+  background-color: #0058CB;
+  color: white;
+}
+</style>
+
+
+<div class="ui_container">
+  <div class="content">
+  <label for="description">Content</label>
+  <!-- <input class="textarea" type="textarea" rows="" value="Your post goes here" id="description"> -->
+  <textarea id="txtArea" rows="4" cols=""></textarea>
+
+  </div>
 
   <div class="radio">
     <input id="radioButton1"type="radio" class="radio__button" value="1" name="variantGroup" >
@@ -9,21 +81,15 @@
     <label for="radioButton2" class="radio__label">Single Image</label>
   </div>
 <button id="create">Create</button>
-<button id="cancel">Cancel</button>
+</div>
 <script>
 
 document.getElementById('create').onclick = () => {
   const description = document.getElementById('description').value;
   const noteVariant = document.querySelector('input[name="variantGroup"]:checked').value;
 
-// destructure for now 
-  // parent.postMessage({ uiMessage: { type: 'create-note', description, noteVariant } }, '*')
   parent.postMessage({ pluginMessage: { description, noteVariant } }, '*')
 
-}
-
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
 }
 
 </script>

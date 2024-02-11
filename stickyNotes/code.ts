@@ -1,6 +1,8 @@
 
 figma.showUI(__html__);
 
+figma.ui.resize(300,400)
+
 figma.ui.onmessage = async (pluginMessage) => {
 
   await figma.loadFontAsync({ family: "Roboto Slab", style: "Regular" })
@@ -9,7 +11,7 @@ figma.ui.onmessage = async (pluginMessage) => {
   // get currently selected frame component key
   //figma.currentPage.selection[0].key
 
-  const componentKey = "add-key"
+  const componentKey = "b0a6963d646ea1e22cb38756600ee42d8d690340"
   figma.importComponentSetByKeyAsync(componentKey).then((noteComponentSet) => {
     console.log(noteComponentSet); 
   
