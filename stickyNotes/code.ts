@@ -1,7 +1,7 @@
 
 figma.showUI(__html__);
 
-figma.ui.resize(300,400)
+figma.ui.resize(300,300)
 
 figma.ui.onmessage = async (pluginMessage) => {
 
@@ -13,30 +13,40 @@ figma.ui.onmessage = async (pluginMessage) => {
 
   const componentKey = "b0a6963d646ea1e22cb38756600ee42d8d690340"
   figma.importComponentSetByKeyAsync(componentKey).then((noteComponentSet) => {
-    console.log(noteComponentSet); 
   
     const nodes:SceneNode[] = [];
   
-    let selectedVarient;
+    let selectedVarient = noteComponentSet.defaultVariant as ComponentNode;
 
-  //  if(pluginMessage.type === 'create-note'){
-    switch(pluginMessage.noteVariant) {
-      case "2":
-          selectedVarient = figma.root.findOne(node => node.type == "COMPONENT" && node.name == "Type=01. Note with title") as ComponentNode;
+    if(selectedVarient == null) {
+      figma.notify('Error please try again')
+    }else{
+      const newPost = selectedVarient.createInstance();
+   
+      switch(pluginMessage.noteColorVariant) {
+        case "purple":
+          newPost.fills = [{type: 'SOLID', color: {r: 0.82, g: 0.78, b: 0.98}}]
           break;
-      default:
-          selectedVarient = noteComponentSet.defaultVariant as ComponentNode;
+        case "pink":
+          newPost.fills = [{type: 'SOLID', color: {r: 0.98, g: 0.73, b: 0.79}}]
           break;
+        case "green":
+         newPost.fills = [{type: 'SOLID', color: {r: 0.74, g: 0.91, b: 0.78}}]
+          break;
+        case "white":
+          newPost.fills = [{type: 'SOLID', color: {r: 1, g: 1, b: 1}}]
+          break
+        default:
+            break;
+      }
+      
+      const noteDescription = newPost.findOne(node => node.type == "TEXT" && node.name == "body") as TextNode;
+
+      noteDescription.characters = pluginMessage.description;
+      nodes.push(newPost);
+      figma.viewport.scrollAndZoomIntoView(nodes);
     }
-//  }
-
-    const newPost = selectedVarient.createInstance();
-    const noteDescription = newPost.findOne(node => node.type == "TEXT" && node.name == "title") as TextNode;
-
-    noteDescription.characters = pluginMessage.description;
-    nodes.push(newPost);
-    figma.viewport.scrollAndZoomIntoView(nodes);
-
+    
   // figma.closePlugin();
   })
 };

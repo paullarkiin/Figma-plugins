@@ -1,95 +1,154 @@
 
 <style>
-/* global styles */
-* {
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  box-sizing: border-box;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  /* color: var(--figma-color-text); */
-  height: 100%;
-  width: 300px;
-  overflow: hidden;
-}
-textarea {
-  resize: none;
-}
+  /* global styles */
+  * {
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* color: var(--figma-color-text); */
+    height: 100%;
+    width: 300px;
+    overflow: hidden;
+  }
+  textarea {
+    resize: none;
+  }
 </style>
 
 <style>
-.ui_container {
-  padding: 16px;
-  height: 100vh;
-}
+  .ui_container {
+    padding: 16px;
+    height: 100vh;
+  }
 
-.content{
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+  .content{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+  }
 
-input,
-textarea {
-  /* background-color: var(--figma-color-bg); */
-  /* color: var(--figma-color-text); */
-  /* border: 2px solid var(--figma-color-border); */
-  border-radius: 4px;
-  padding: 8px 12px;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
-  transition: border-color 150ms ease-in-out;
-}
+  input,
+  textarea {
+    border: 2px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    transition: border-color 150ms ease-in-out;
+  }
 
-.radio{
-  margin-top: 8px;
-}
 
-#create {
-  cursor: pointer;
-  border-radius: 6px;
-  padding: 8px 16px;
-  margin-top: 16px;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  width: 268px;
-  border: none;
-  background-color: #0058CB;
-  color: white;
-}
+  #btn_create {
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 8px 16px;
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    width: 268px;
+    border: none;
+    background-color: #0058CB;
+    color: white;
+  }
+
+  .color_selection_container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .color-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 8px 12px 8px 12px;
+    background: #F2F3FD;
+    border-radius: 8px;
+  }
+
+  .color {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 9999px;
+  }
+
+  .swatch{
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  textarea:focus {
+      outline: none !important;
+      border:2px solid #0058CB;
+    }
+
+  .color input[type="radio"]:checked + .swatch {
+    outline: 2px solid #0058CB;
+    outline-offset: 2px;
+  }
+  
 </style>
 
 
 <div class="ui_container">
   <div class="content">
-  <label for="description">Content</label>
-  <!-- <input class="textarea" type="textarea" rows="" value="Your post goes here" id="description"> -->
-  <textarea id="txtArea" rows="4" cols=""></textarea>
-
+  <label>Note content</label>
+  <textarea id="description" rows="4" placeholder="Enter your message here...."></textarea>
   </div>
-
-  <div class="radio">
-    <input id="radioButton1"type="radio" class="radio__button" value="1" name="variantGroup" >
-    <label for="radioButton1" class="radio__label">No Image</label>
-
-    <input id="radioButton2"type="radio" class="radio__button" value="2" name="variantGroup" >
-    <label for="radioButton2" class="radio__label">Single Image</label>
+<div class="color_selection_container">
+  <label class="content">Note color</label>
+  <div class="color-options">
+    <label class="color">
+      <input type="radio" value="yellow" name="variantColorGroup" checked/>
+      <div class="swatch" style="background-color: rgb(249, 228, 211);border: 2px solid rgba(19, 19, 20, 0.13);"></div>
+    </label>
+    <label class="color">
+      <input type="radio" value="purple" name="variantColorGroup"/>
+      <div class="swatch" style="background-color: rgb(214, 200, 252);border: 2px solid rgba(19, 19, 20, 0.13);"></div>
+    </label>
+    <label class="color">
+      <input type="radio" value="pink" name="variantColorGroup"/>
+      <div class="swatch" style="background-color: rgb(250, 187, 203);border: 2px solid rgba(19, 19, 20, 0.13);"></div>
+    </label>
+    <label class="color">
+      <input type="radio" value="green" name="variantColorGroup"/>
+      <div class="swatch" style="background-color: rgb(189, 233, 201);border: 2px solid rgba(19, 19, 20, 0.13);"></div>
+    </label>
+    <label class="color">
+      <input type="radio" value="white" name="variantColorGroup"/>
+      <div class="swatch" style="background-color: rgb(255, 255, 255);border: 2px solid rgba(19, 19, 20, 0.13);"></div>
+    </label>
   </div>
-<button id="create">Create</button>
+</div>
+<button id="btn_create">Create</button>
 </div>
 <script>
 
-document.getElementById('create').onclick = () => {
+document.getElementById('btn_create').onclick = () => {
   const description = document.getElementById('description').value;
-  const noteVariant = document.querySelector('input[name="variantGroup"]:checked').value;
 
-  parent.postMessage({ pluginMessage: { description, noteVariant } }, '*')
+  const noteColorVariant = document.querySelector('input[name="variantColorGroup"]:checked').value;
+  console.log(noteColorVariant);
 
+  parent.postMessage({ pluginMessage: { description, noteColorVariant } }, '*')
+  document.getElementById('description').value = "";
 }
 
 </script>
